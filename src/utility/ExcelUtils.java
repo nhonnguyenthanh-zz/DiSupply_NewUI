@@ -3,9 +3,12 @@ package utility;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFRow;
+
 import config.Constants;
 import executionEngine.DriverScript;
     public class ExcelUtils {
@@ -44,7 +47,7 @@ import executionEngine.DriverScript;
                    	Cell = ExcelWSheet.getRow(RowNum).getCell(ColNum);
                    	if(Cell!=null)
                    	{
-                    CellData = Cell.getStringCellValue();
+                    CellData = Cell.getStringCellValue().toString();
                     return CellData;
                    	}
                    	else {
@@ -210,6 +213,18 @@ import executionEngine.DriverScript;
                     Log.error("Class Utils | Method totalTestCaseExecute | Exception desc : " + ex);
                     return 0;
                 }
+            }
+            public static void setColorRowFailed(int RowNum, String SheetName) throws Exception
+            {
+            	try {
+            		ExcelWSheet = ExcelWBook.getSheet(SheetName);
+            		XSSFRow row = ExcelWSheet.getRow(RowNum);
+            		XSSFCellStyle cellStyle = row.getRowStyle();
+            		cellStyle.setFillBackgroundColor(IndexedColors.RED.getIndex());
+					
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
             }
 
     	}

@@ -81,17 +81,12 @@ public class DriverScript {
 					for (;iTestStep<iTestLastStep;iTestStep++){
 			    		sActionKeyword = ExcelUtils.getCellData(iTestStep, Constants.Col_ActionKeyword, sFeature);
 			    		sPageObject = ExcelUtils.getCellData(iTestStep, Constants.Col_PageObject, sFeature);
-			    		//if(sActionKeyword.equals("inputItems")){
-			    		//	iTestDataStep = ExcelUtils.getRowContains(sTestCaseID, Constants.Col_TestCaseID, Constants.Col_Feature);
-							//iTestDataLastStep = ExcelUtils.getTestStepsCount(Constants.Sheet_TestData, sTestCaseID, iTestDataStep);
-						//	action_InputItems(iTestDataStep, iTestDataLastStep);
-			    		//}
-			    		//else{
-			    			sData = ExcelUtils.getCellData(iTestStep, Constants.Col_DataSet, sFeature);
-			    			execute_Actions();
+			    		sData = ExcelUtils.getCellData(iTestStep, Constants.Col_DataSet, sFeature);
+			    		execute_Actions();
 			    		
 						if(bResult==false){
 							if(bSkip==true){
+								ExcelUtils.setColorRowFailed(iTestcase, Constants.Sheet_TestCases);
 								ExcelUtils.setCellData(Constants.KEYWORD_FAIL,iTestcase,Constants.Col_Result,Constants.Sheet_TestCases);
 							}
 							else {
@@ -130,33 +125,6 @@ public class DriverScript {
 		
      }
      
-     /*
-     public static class addItemsFromExel
- 	{
- 		public String requestQty;
- 		public String purchaseUoM;
- 		public String name;
- 	}
-     
-     
-     public void action_InputItems(Integer iTestDataStep, Integer iTestDataLastStep) throws Exception{
-    	 
-    	 //iTestDataStep = ExcelUtils.getRowContains(sTestCaseID, Constants.Col_TestCaseID, Constants.Sheet_TestData);
-    	 //iTestDataLastStep = ExcelUtils.getTestStepsCount(Constants.Sheet_TestData, sTestCaseID, iTestDataStep);
-    	 bResult=true;
-    	 for (;iTestDataStep<iTestDataLastStep;iTestDataStep++){
-    		 productName = ExcelUtils.getCellData(iTestDataStep, Constants.Col_ProductName, Constants.Sheet_TestData);
-    		 quantity = ExcelUtils.getCellData(iTestDataStep, Constants.Col_Quantity, Constants.Sheet_TestData).toString();
-    		 UoM = ExcelUtils.getCellData(iTestDataStep, Constants.Col_UoM, Constants.Sheet_TestData);
-    		 addItemsFromExel item = new addItemsFromExel();
-    		 item.name = productName;
-    		 item.requestQty = quantity;
-    		 item.purchaseUoM = UoM;
-    		 itemsResult.add(item);
-    	 }
-    	 execute_Actions();
-    	 
-     }
-     */
+
 	
 }

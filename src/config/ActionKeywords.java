@@ -25,6 +25,11 @@ public class ActionKeywords {
 	//public java.util.List<getProduct> itemsResult  = new  ArrayList<getProduct>();
 	
 	//public java.util.List<WebElement> getAllItems;
+	private static void waitElement(WebElement element)
+	{
+		iwait = new WebDriverWait(driver, 10);
+		iwait.until(ExpectedConditions.elementToBeClickable(element));
+	}
 	
 	public static void openBrowser(String object, String browser){
 		
@@ -73,8 +78,7 @@ public class ActionKeywords {
 		try{
 			Log.info("Clicking on "+ object);
 			//Thread.sleep(wait);
-			iwait = new WebDriverWait(driver, 10);
-			iwait.until(ExpectedConditions.elementToBeClickable(driver.findElement(RespositoryParser.getObject(object))));
+			waitElement(driver.findElement(RespositoryParser.getObject(object)));
 			WebElement element = driver.findElement(RespositoryParser.getObject(object));
 			element.click();
 		 }catch(Exception e){
@@ -86,8 +90,7 @@ public class ActionKeywords {
 	public static void input(String object, String data){
 		try{
 			Log.info("Entering the text in " + object);
-			iwait = new WebDriverWait(driver, 10);
-			iwait.until(ExpectedConditions.elementToBeClickable(driver.findElement(RespositoryParser.getObject(object))));
+			waitElement(driver.findElement(RespositoryParser.getObject(object)));
 			WebElement element = driver.findElement(RespositoryParser.getObject(object));
 			element.clear();
 			element.sendKeys(data);
@@ -101,8 +104,7 @@ public class ActionKeywords {
 		
 		try {
 			Log.info("Choose a value in dropdown " + object);
-			iwait = new WebDriverWait(driver, 10);
-			iwait.until(ExpectedConditions.elementToBeClickable(driver.findElement(RespositoryParser.getObject(object))));
+			waitElement(driver.findElement(RespositoryParser.getObject(object)));
 			WebElement element = driver.findElement(RespositoryParser.getObject(object));
 			Select select = new Select(element);
 			select.selectByVisibleText(data);
@@ -119,8 +121,7 @@ public class ActionKeywords {
 		try {
 			
 			Log.info("Assert text in field " + object);
-			iwait = new WebDriverWait(driver, 10);
-			iwait.until(ExpectedConditions.elementToBeClickable(driver.findElement(RespositoryParser.getObject(object))));
+			waitElement(driver.findElement(RespositoryParser.getObject(object)));
 			WebElement element = driver.findElement(RespositoryParser.getObject(object));
 			String actual = element.getText();
 			Assert.assertEquals(expected, actual);
@@ -137,8 +138,7 @@ public class ActionKeywords {
 		
 		try {
 			Log.info("Verify text in field " + object);
-			iwait = new WebDriverWait(driver, 10);
-			iwait.until(ExpectedConditions.elementToBeClickable(driver.findElement(RespositoryParser.getObject(object))));
+			waitElement(driver.findElement(RespositoryParser.getObject(object)));
 			WebElement element = driver.findElement(RespositoryParser.getObject(object));
 			String actual = element.getText();
 			if(expected.equals(actual)){
@@ -179,7 +179,7 @@ public class ActionKeywords {
          	}
 	}
 	
-	public static void scrollHeightToPixel(String object_, String data)
+	public static void scrollHeightToPixel(String object, String data)
     {
         try
         {
@@ -193,13 +193,12 @@ public class ActionKeywords {
             DriverScript.bResult = false;
         }
     }
-    public static void scrollToElement(String object_, String data)
+    public static void scrollToElement(String object, String data)
     {
         try
         {
             Log.info("scroll to object" + data);
-            iwait = new WebDriverWait(driver, 10);
-            iwait.until(ExpectedConditions.elementToBeClickable(driver.findElement(RespositoryParser.getObject(data))));
+            waitElement(driver.findElement(RespositoryParser.getObject(object)));
             WebElement element = driver.findElement(RespositoryParser.getObject(data));
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
         }
@@ -210,7 +209,7 @@ public class ActionKeywords {
         }
         
     }
-    public static void scrollToBottom(String object_, String data)
+    public static void scrollToBottom(String object, String data)
     {
     	((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
     }
