@@ -3,6 +3,7 @@ package config;
 import java.util.concurrent.TimeUnit;
 
 import org.testng.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,6 +15,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import executionEngine.DriverScript;
+import utility.Common;
 import utility.Log;
 
 public class ActionKeywords {
@@ -213,7 +215,39 @@ public class ActionKeywords {
     {
     	((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
     }
-	
+    public static void acceptAlert(String object, String data)
+	{
+		try {
+			if(Common.isPresentAlert(driver)){
+				Alert alert = driver.switchTo().alert();
+				alert.accept();
+			}
+			else {
+				System.out.println("Not Found Popup Alert");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Not Found Button To Accept Popup");
+		}
+	}
+    public static void cancelAlert(String object, String data)
+	{
+		try {
+			if(Common.isPresentAlert(driver)){
+				Alert alert = driver.switchTo().alert();
+				alert.dismiss();
+			}
+			else {
+				System.out.println("Not Found Popup Alert");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Not Found Button To Cancel Popup");
+		}
+	}
+    
+    
+    
 	/*
 	public void inputItems(String object, String data){
 		
